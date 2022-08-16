@@ -5,3 +5,5 @@ hi world
 chao world
 
 konnichiwa world
+
+(^ _ ^)

@@ -1,7 +1,0 @@
-hello world
-
-hi world
-
-chao world
-
-konnichiwa world

@@ -52,3 +52,9 @@ function sayHello() {
   alert("こんにちは！");
 }
 
+
+function viewItem(){
+  const item = document.getElementById("item1").value;
+  console.log(item);
+
+}

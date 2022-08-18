@@ -58,3 +58,60 @@ function viewItem(){
   console.log(item);
 
 }
+
+//ログイン機能についての関数
+
+/*
+Firebase Authentcation を使った認証サンプル 01
+Firebase Authentication UI を使い、サインイン用のUIを生成
+ポップアップウィンドウで認証画面を表示、サインイン後元の画面に移動
+サインアウト ボタンと、Googleの表示名をウェルカムメッセージとして表示
+サインアウト 用の関数「signOut」を定義
+*/
+
+const ui = new firebaseui.auth.AuthUI(firebase.auth());
+const uiConfig = {
+callbacks: {
+signInSuccessWithAuthResult: function(authResult, redirectUrl) {
+  return true;
+},
+},
+signInFlow: 'popup',
+signInSuccessUrl: 'login.html',
+signInOptions: [
+firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+],
+tosUrl: 'sample01.html',
+privacyPolicyUrl: 'index.html'
+};
+
+ui.start('#auth', uiConfig);
+
+firebase.auth().onAuthStateChanged(user => {
+if (user) {
+    const signOutMessage = `
+    <p>${user.email}(${user.displayName})でログインしました!<\/p>
+    <a href="./training.html" class="btn btn-secondary fw-bold border-black bg-white w-25 h-50">進む</a>
+    <br>
+    <button type="submit" class="btn btn-secondary fw-bold border-black bg-white w-25 h-50" onClick="signOut()">サインアウト<\/button>
+    `;
+    document.getElementById('auth').innerHTML =  signOutMessage;
+    console.log('ログインしています');
+
+} 
+});
+
+function signOut() {
+firebase.auth().onAuthStateChanged(user => {
+firebase
+  .auth()
+  .signOut()
+  .then(() => {
+    console.log('ログアウトしました');
+    location.reload();
+  })
+  .catch((error) => {
+    console.log(`ログアウト時にエラーが発生しました (${error})`);
+  });
+});
+}

@@ -19,6 +19,11 @@
  <script defer src="src/basic.js"></script>
  <link rel="stylesheet" type="text/css" href="src/styles2.css">
 
+ <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+ <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
 </head>
 
 <body class="text-center text-bg-dark d-flex h-100">
@@ -40,27 +45,37 @@
       </div>
     </header>
 
-      <div class="row mx-2 text-secondary">
-        <div class="col-md-4 shadow-sm">
-          <a class = "text-secondary" href="training.html">
-          <img src="src/nekos/amesho.PNG" height = "100">
-          筋トレ
-          </a>
+      <div class="row mx-5 text-secondary">
+        <div class="col-md-6" data-toggle="modal" data-target="#testModal">
+          <img src="src/nekos/amesho.PNG" height="100">
+          トレーニングを終わる
+          <!-- <button type="button" class="btn btn-primary mb-12" data-toggle="modal" data-target="#testModal">トレーニングを終わる</button> -->
+          <!-- </a> -->
         </div>
-        <div class="col-md-4 shadow-sm">
-          <a class = "text-primary" href="neko.html">
+        <div class="col-md-6">
+          <a class = "text-primary" href="training.html">
           <img src="src/nekos/bengal.PNG" height = "100">
-          猫をみる
+          別のトレーニングを行う
           </a>
         </div>
-        <div class="col-md-4 shadow-sm">
-          <a class = "text-danger" href="gacha.html">
-          <img src = "src/nekos/green.PNG" height = "100">
-          ガチャをひく
-          </a>
-        </div>
-    
       </div>
+
+      <div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">トレーニング記録</h4></h4>
+                </div>
+                <div class="modal-body">
+                    <label>？？？を！！！分記録しました</label>
+                </div>
+                <div class="modal-footer">
+                    <a type="button" class="btn btb-primary btn-default" href="select.html">おわる</a>
+                    <!-- <button type="button" class="btn btn-danger">削除</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
 
     <footer class="mt-auto text-white-50">
       <p>Cover template for <a href="https://getbootstrap.com/" class="text-white">Bootstrap</a>, by <a href="https://twitter.com/mdo" class="text-white">@mdo</a>.</p>

@@ -55,7 +55,8 @@
 
 function viewItem(){
   const item = document.getElementById("item1").value;
-  const url = "https://www.youtube.com/results?search_query="+item
+  const time = document.getElementById("time").value;
+  const url = "https://www.youtube.com/results?search_query="+item+"+"+time+"分";
   window.open(url);
   // console.log(url);
 
@@ -93,7 +94,7 @@ firebase.auth().onAuthStateChanged(user => {
 if (user) {
     const signOutMessage = `
     <p>${user.email}(${user.displayName})でログインしました!<\/p>
-    <a href="./training.html" class="btn btn-secondary fw-bold border-black bg-white w-25 h-50">進む</a>
+    <a href="./select.html" class="btn btn-secondary fw-bold border-black bg-white w-25 h-50">進む</a>
     <br>
     <button type="submit" class="btn btn-secondary fw-bold border-black bg-white w-25 h-50" onClick="signOut()">サインアウト<\/button>
     `;

@@ -105,16 +105,22 @@ function record(){
               },{merge: true });
           //}
           //console.log('データベースに書き込みました');
+       
+          //データベースのusers情報（所持金）を更新
+          //所持金を取得
+          const userRef = await firebase.firestore().collection('users').doc(user.uid);
+          const userDocument = await userRef.get()
+          
+          var userMoney = userDocument.get('money');
+
+          //更新(所持金=トレーニングで取得したお金+所持金)
+          await userRef.update({
+            money: recMoney + userMoney,
+            updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+          })
       } 
   });
   
-  //データベースのusers情報（所持金）を更新
-  const userRef=firebase.firestore().collection('users');
-  const userDocument=await userRef.get();
-  var userMoney = userDoc.get('money');
-  
-  console.log(userMoney);
-
   // const user = firebase.auth().currentUser;
   // console.log(user);
   // //if (user) {
@@ -126,6 +132,19 @@ function record(){
   //} 
 
   document.getElementById("recordtr").insertAdjacentHTML("afterbegin", item + "を" + time + "分");
+}
+
+function getUserInfo(){
+  // console.log("function getUser");
+  firebase.auth().onAuthStateChanged(async(user) =>{
+    const userRef = await firebase.firestore().collection('users').doc(user.uid);
+    const userDocument = await userRef.get()
+    var userMoney = userDocument.get('money');
+    var userName = userDocument.get('display_name');
+
+    console.log([userName,userMoney])
+  //  return [userName,userMoney];
+  })
 }
 
 //ログイン機能についての関数

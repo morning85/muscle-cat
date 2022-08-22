@@ -53,13 +53,79 @@
 // }
 
 
+/* function viewItem(){
+  const item = document.getElementById("item1").value;
+  const time = document.getElementById("time").value;
+  const url = "https://www.youtube.com/results?search_query="+item+"+"+time+"分";
+  var query = "?item=" + item + "&time=" + time; //クエリ文字列
+  var url2 = "./after.html" + query;
+
+  window.open(url);
+  location.href = url2;
+  // console.log(url);
+
+} */
+
+//YouTubeに飛ばす
 function viewItem(){
   const item = document.getElementById("item1").value;
   const time = document.getElementById("time").value;
   const url = "https://www.youtube.com/results?search_query="+item+"+"+time+"分";
   window.open(url);
-  // console.log(url);
+  // console.log(url); 
+  
+}
 
+//トレーニングを記録する
+function record(){
+  const item = document.getElementById("item1").value;
+  const time = document.getElementById("time").value;
+  var recMoney;
+  const parsedInt = parseInt(time);
+  if (parsedInt<=10){
+    recMoney = 10;
+  }
+  else{
+    recMoney = 20;
+  }
+
+  firebase.auth().onAuthStateChanged(async(user) => {
+      if (user) {
+          //console.log('ログインしています');
+          //console.log(item);
+          var userDoc = await firebase.firestore().collection('trainings').doc();
+          //if (!userDoc.exists) {
+              // Firestore にドキュメントが作られていなければ作る
+              await userDoc.set({
+                  userid: user.uid,
+                  item : item,
+                  time : time,
+                  money : recMoney,
+                  created_at: firebase.firestore.FieldValue.serverTimestamp()
+              },{merge: true });
+          //}
+          //console.log('データベースに書き込みました');
+      } 
+  });
+  
+  //データベースのusers情報（所持金）を更新
+  const userRef=firebase.firestore().collection('users');
+  const userDocument=await userRef.get();
+  var userMoney = userDoc.get('money');
+  
+  console.log(userMoney);
+
+  // const user = firebase.auth().currentUser;
+  // console.log(user);
+  // //if (user) {
+  //   var userDoc = await firebase.firestore().collection('users').doc(user.uid).collection("training").get();
+  //       await userDoc.ref.set({
+  //        item: item,
+  //        time: time,
+  //      });
+  //} 
+
+  document.getElementById("recordtr").insertAdjacentHTML("afterbegin", item + "を" + time + "分");
 }
 
 //ログイン機能についての関数
@@ -90,8 +156,20 @@ privacyPolicyUrl: 'index.html'
 
 ui.start('#auth', uiConfig);
 
-firebase.auth().onAuthStateChanged(user => {
+firebase.auth().onAuthStateChanged(async(user) => {
 if (user) {
+     // ログイン済みのユーザー情報があるかをチェック
+    var userDoc = await firebase.firestore().collection('users').doc(user.uid).get();
+    if (!userDoc.exists) {
+       // Firestore にユーザー用のドキュメントが作られていなければ作る
+        await userDoc.ref.set({
+         money : 0,
+         screen_name: user.uid,
+         display_name: user.displayName,
+         created_at: firebase.firestore.FieldValue.serverTimestamp(),
+       });
+     }
+
     const signOutMessage = `
     <p>${user.email}(${user.displayName})でログインしました!<\/p>
     <a href="./select.html" class="btn btn-secondary fw-bold border-black bg-white w-25 h-50">進む</a>

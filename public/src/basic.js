@@ -134,18 +134,55 @@ function record(){
   document.getElementById("recordtr").insertAdjacentHTML("afterbegin", item + "を" + time + "分");
 }
 
-function getUserInfo(){
-  // console.log("function getUser");
-  firebase.auth().onAuthStateChanged(async(user) =>{
-    const userRef = await firebase.firestore().collection('users').doc(user.uid);
-    const userDocument = await userRef.get()
-    var userMoney = userDocument.get('money');
-    var userName = userDocument.get('display_name');
+// function getUserInfo(){
+//   // console.log("function getUser");
+//   firebase.auth().onAuthStateChanged(async(user) =>{
+//     const userRef = await firebase.firestore().collection('users').doc(user.uid);
+//     const userDocument = await userRef.get()
+//     var userMoney = userDocument.get('money');
+//     var userName = userDocument.get('display_name');
 
-    console.log([userName,userMoney])
-  //  return [userName,userMoney];
-  })
+//     console.log([userName,userMoney]);
+//   //  return [userName,userMoney];
+//   })
+// }
+
+
+function getUserInfo(){
+  firebase.auth().onAuthStateChanged(async(user) => {
+    if (user) {
+      var userDoc = await firebase.firestore().collection('users').doc(user.uid).get();
+      var userMoney= userDoc.get('money')
+      var userName=userDoc.get('display_name');
+      
+      document.getElementById('coin').innerHTML = userMoney+"コイン"
+      console.log([userName,userMoney]);
+
+  
+      // const signOutMessage = `
+      // <p>${user.email}(${user.displayName})でログインしました!<\/p>
+      // <a href="./select.html" class="btn btn-secondary fw-bold border-black bg-white w-25 h-50">進む</a>
+      // <br>
+      // <button type="submit" class="btn btn-secondary fw-bold border-black bg-white w-25 h-50" onClick="signOut()">サインアウト<\/button>
+      // `;
+      // document.getElementById('auth').innerHTML =  signOutMessage;
+      // console.log('ログインしています');
+  
+  } 
+  });
+
 }
+
+firebase.auth().onAuthStateChanged(async(user) => {
+  if (user) {
+    var userDoc = await firebase.firestore().collection('users').doc(user.uid).get();
+    var userMoney= userDoc.get('money')
+    var userName=userDoc.get('display_name');
+    
+    document.getElementById('userName').innerHTML =userName;
+    document.getElementById('coin').innerHTML = userMoney;
+  }
+})
 
 //ログイン機能についての関数
 

@@ -1,7 +1,11 @@
 body {
+    background-color: #FFF9D9;
     color: #ffa07a;
     font-size: 80%;
-    font-family: serif;
+    font-family: "MS Pゴシック" ;
+    text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
+    /* max-width: 42em; */
+  box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
 }
 
 .custum-pull {  
@@ -19,7 +23,7 @@ body {
     border-radius: 4px;
     border: solid 1px #000000;
   /* 　三角マーク作成 */
-    background-image: linear-gradient(45deg, transparent 50%, rgba(0,0,0,0.9) 50%),  linear-gradient(135deg, rgba(0,0,0,0.9) 50%, transparent 50%);
+    background-image: linear-gradient(45deg, transparent 50%, rgba(0,0,0,0.9) 50%),  linear-gradient(135deg, rgba(0,0,0,0.9) 50%, transparent 50%);ls
     background-size: 10px 10px, 10px 10px;
     background-position: calc(100% - 30px) 50%, calc(100% - 20px) 50%;
     background-repeat: no-repeat;
@@ -33,3 +37,43 @@ body {
   .custum-pull::-ms-expand {
     display: none;
   }
+
+
+
+/* カスタムデフォルトボタン */
+.btn-secondary,
+.btn-secondary:hover,
+.btn-secondary:focus {
+  color: #707070;
+  background-color: #FFF;
+
+  text-shadow: none; /* `body`からの継承を防ぐ */
+}
+
+
+/*
+ * ベース構造
+ */
+
+/*
+ * ヘッダ
+ */
+
+.nav-masthead .nav-link {
+  color: rgba(255, 255, 255, .5);
+  border-bottom: .25rem solid transparent;
+}
+
+.nav-masthead .nav-link:hover,
+.nav-masthead .nav-link:focus {
+  border-bottom-color: rgba(255, 255, 255, .25);
+}
+
+.nav-masthead .nav-link + .nav-link {
+  margin-left: 1rem;
+}
+
+.nav-masthead .active {
+  color: #fff;
+  border-bottom-color: #fff;
+}

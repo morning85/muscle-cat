@@ -130,8 +130,9 @@ function record(){
   //        time: time,
   //      });
   //} 
-
+ 
   document.getElementById("recordtr").insertAdjacentHTML("afterbegin", item + "を" + time + "分");
+  document.getElementById("recordMoney").insertAdjacentHTML("afterbegin",recMoney);
 }
 
 // function getUserInfo(){

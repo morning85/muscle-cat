@@ -220,6 +220,7 @@ if (user) {
     if (!userDoc.exists) {
        // Firestore にユーザー用のドキュメントが作られていなければ作る
         await userDoc.ref.set({
+         cat : [],
          money : 0,
          screen_name: user.uid,
          display_name: user.displayName,
@@ -252,4 +253,12 @@ firebase
     console.log(`ログアウト時にエラーが発生しました (${error})`);
   });
 });
+}
+
+function gacha(){
+  var max =;
+  var min = ;
+  var rand=  Math.floor(Math.random() * (max - min)) + min;
+
+
 }

@@ -87,6 +87,58 @@ document.addEventListener('DOMContentLoaded', function(){
   });
 });
 
+function gacha(){
+  //乱数を発生させる
+  var max =19;
+  var min =0 ;
+  var rand=  Math.floor(Math.random() * (max - min + 1)) + min;
+  console.log("乱数"+rand);
+
+  //データベースに猫追加
+  firebase.auth().onAuthStateChanged(async(user) => {
+    if (user) {
+        //獲得ねこデータを取得
+        const userRef = await firebase.firestore().collection('users').doc(user.uid);
+        const userDocument = await userRef.get()
+        
+        var userCat = userDocument.get('cat');
+        var userMoney = userDocument.get('money');
+
+        //20コイン以上ならガチャ実行
+        if(userMoney >= 20){
+           //獲得ねことお金更新
+           userCat[rand] = true;
+           console.log(userCat);
+
+           await userRef.update({
+             cat : userCat,  
+             money : userMoney - 20,   
+             updatedAt: firebase.firestore.FieldValue.serverTimestamp(),    
+            });
+            
+            const catRef = await firebase.firestore().collection('cats').doc(String(rand));
+            const catDoc = await catRef.get();
+            
+            var catName = catDoc.get('cat_type');
+            console.log(catName);
+            
+            var fileName = catDoc.get('file_name');
+            console.log(fileName);
+
+             //猫データ取得
+             document.getElementById('catName').innerHTML = catName + "獲得！！";
+             document.getElementById('fileName').innerHTML = "<img src = 'src/nekos/"+ fileName+"'>";
+          }
+
+        else{
+          // document.getElementBtId('catName').innerHTML = 20 - userMoney +"コインが足りません。";
+          document.getElementById('fileName').innerHTML = 20 - userMoney + "コイン足りません。　";
+        }
+        document.getElementById('coin').innerHTML = userMoney;
+    } 
+});
+}
+
 //YouTubeに飛ばす
 function viewItem(){
   const item = document.getElementById("item1").value;
@@ -94,7 +146,6 @@ function viewItem(){
   const url = "https://www.youtube.com/results?search_query="+item+"+"+time+"分";
   window.open(url);
   // console.log(url); 
-  
 }
 
 //トレーニングを記録する
@@ -112,8 +163,7 @@ function record(){
 
   firebase.auth().onAuthStateChanged(async(user) => {
       if (user) {
-          //console.log('ログインしています');
-          //console.log(item);
+        //trainingsのデータベースを取得
           var userDoc = await firebase.firestore().collection('trainings').doc();
           //if (!userDoc.exists) {
               // Firestore にドキュメントが作られていなければ作る
@@ -141,33 +191,9 @@ function record(){
           })
       } 
   });
-  
-  // const user = firebase.auth().currentUser;
-  // console.log(user);
-  // //if (user) {
-  //   var userDoc = await firebase.firestore().collection('users').doc(user.uid).collection("training").get();
-  //       await userDoc.ref.set({
-  //        item: item,
-  //        time: time,
-  //      });
-  //} 
-
   document.getElementById("recordtr").insertAdjacentHTML("afterbegin", item + "を" + time + "分");
+  document.getElementById("recordMoney").insertAdjacentHTML("afterbegin",recMoney);
 }
-
-// function getUserInfo(){
-//   // console.log("function getUser");
-//   firebase.auth().onAuthStateChanged(async(user) =>{
-//     const userRef = await firebase.firestore().collection('users').doc(user.uid);
-//     const userDocument = await userRef.get()
-//     var userMoney = userDocument.get('money');
-//     var userName = userDocument.get('display_name');
-
-//     console.log([userName,userMoney]);
-//   //  return [userName,userMoney];
-//   })
-// }
-
 
 function getUserInfo(){
   firebase.auth().onAuthStateChanged(async(user) => {
@@ -178,21 +204,9 @@ function getUserInfo(){
       
       document.getElementById('coin').innerHTML = userMoney+"コイン"
       console.log([userName,userMoney]);
-
-  
-      // const signOutMessage = `
-      // <p>${user.email}(${user.displayName})でログインしました!<\/p>
-      // <a href="./select.html" class="btn btn-secondary fw-bold border-black bg-white w-25 h-50">進む</a>
-      // <br>
-      // <button type="submit" class="btn btn-secondary fw-bold border-black bg-white w-25 h-50" onClick="signOut()">サインアウト<\/button>
-      // `;
-      // document.getElementById('auth').innerHTML =  signOutMessage;
-      // console.log('ログインしています');
-  
-  } 
-  });
-
-}
+    }
+  })
+};
 
 firebase.auth().onAuthStateChanged(async(user) => {
   if (user) {
@@ -203,7 +217,7 @@ firebase.auth().onAuthStateChanged(async(user) => {
     document.getElementById('userName').innerHTML =userName;
     document.getElementById('coin').innerHTML = userMoney;
   }
-})
+});
 
 //ログイン機能についての関数
 
@@ -244,6 +258,7 @@ if (user) {
          screen_name: user.uid,
          display_name: user.displayName,
          created_at: firebase.firestore.FieldValue.serverTimestamp(),
+         cat : new Array(20).fill(false),
        });
      }
 
@@ -273,3 +288,4 @@ firebase
   });
 });
 }
+

@@ -66,6 +66,27 @@
 
 } */
 
+document.addEventListener('DOMContentLoaded', function(){
+  firebase.auth().onAuthStateChanged(async(user) => {
+    if (user) {
+        //データベースのusers情報（ねこ）を取得
+        const userRef = await firebase.firestore().collection('users').doc(user.uid);
+        const userDocument = await userRef.get()
+        var userCat = userDocument.get('cat');
+        console.log(userCat);
+        for(let i=0; i<userCat.length; i++){
+          if (userCat[i]){
+            const imgid = "neko" + i;
+            const fileRef = await firebase.firestore().collection('cats').doc(String(i));
+            const fileDocument = await fileRef.get();
+            var filename = fileDocument.get('file_name');
+            document.getElementById(imgid).src = "src/nekos/" + filename;
+          }
+        }
+    } 
+  });
+});
+
 //YouTubeに飛ばす
 function viewItem(){
   const item = document.getElementById("item1").value;

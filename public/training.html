@@ -35,12 +35,12 @@
    
 
  <!--firebaseインポート-->
- <script src="/__/firebase/7.16.0/firebase-app.js"></script>
+ <!-- <script src="/__/firebase/7.16.0/firebase-app.js"></script>
  <script src="/__/firebase/7.16.0/firebase-auth.js"></script>
  <script src="/__/firebase/7.16.0/firebase-firestore.js"></script>
  <script src="/__/firebase/init.js"></script>
  <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
-  <link href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" rel="stylesheet" type="text/css">
+  <link href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" rel="stylesheet" type="text/css"> -->
 </head>
  <!-- <link rel="stylesheet" href="../boostrap/css/bootstrap.min.css">
  <link rel ="stylesheet" href="../boostrap/css/bootstrap.min.css"> -->
@@ -63,7 +63,7 @@
 </head>
 
 
-<body class="text-center text-bg-dark d-flex h-100">
+<body onload = "loadCat();" id="overflow_body" class="text-center text-bg-dark d-flex h-100">
     <div class="d-flex w-100 mx-auto flex-column ">
       <header class="mb-auto px-3 pt-3">
         <div>
@@ -119,7 +119,7 @@
 
         
 
-      <p class="lead">
+      <div class="lead">
           <!--<div class = "pt-5">
             <a href="./after.html" onClick="viewItem()" class="btn btn-secondary fw-bold border-black bg-white w-25 h-50">はじめる</a>
           </div>-->
@@ -129,7 +129,7 @@
           <div class = "pt-5">
           <button class="btn btn-secondary fw-bold border-black bg-white w-25 h-50" data-toggle="modal" data-target="#modal1">おわる</button>
           </div>
-      </p>
+      </div>
 
       <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
         <div class="modal-dialog">
@@ -171,7 +171,14 @@
           </div>
         </div>
       </div>
-   
+
+      <!-- <div class = "catImg">
+        <img id ="cat1" src = "src/nekos/amesho.PNG">
+      </div> -->
+
+      <div class = "catImg2 float-md-end">
+        <div id = "fileName">
+      </div>
     </main>
 
     <footer class="mt-auto text-white-50">
@@ -180,29 +187,6 @@
   </div><!-- /.cover-container -->
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
-  <script type="text/javascript">
-    $(function () {
-        $('#datetimepicker2').datetimepicker({
-            tooltips: {
-                close: '閉じる',
-                pickHour: '時間を取得',
-                incrementHour: '時間を増加',
-                decrementHour: '時間を減少',
-                pickMinute: '分を取得',
-                incrementMinute: '分を増加',
-                decrementMinute: '分を減少',
-                pickSecond: '秒を取得',
-                incrementSecond: '秒を増加',
-                decrementSecond: '秒を減少',
-                togglePeriod: '午前/午後切替',
-                selectTime: '時間を選択'
-            },
-            format: 'HH:mm',
-            locale: 'ja',
-            showClose: true
-        });
-    });
-</script>
 </body>
 
 </html>

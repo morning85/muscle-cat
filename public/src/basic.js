@@ -208,6 +208,44 @@ function getUserInfo(){
   })
 };
 
+//所持している猫をtraining.htmlにランダムに表示する
+function loadCat(){
+  firebase.auth().onAuthStateChanged(async(user) => {
+    if (user) {
+      var userDoc = await firebase.firestore().collection('users').doc(user.uid).get();
+      var userCat = userDoc.get('cat');
+      //持っている猫の番号を取得
+      var catNum = [];
+
+      for(let i=0; i<userCat.length; i++){
+        if (userCat[i] == true){
+          catNum.push(i);
+        }
+      }
+      //
+      var max =catNum.length;
+      var min =0 ;
+      var rand=  Math.floor(Math.random() * (max - min)) + min;
+
+      console.log(catNum);
+      console.log(rand);
+      console.log(catNum[rand]);
+
+      //ねこデータベースを取得
+      const catRef = await firebase.firestore().collection('cats').doc(String(rand));
+      const catDoc = await catRef.get();
+      
+      var fileName = catDoc.get('file_name');
+      console.log(fileName);
+
+      //ファイルパスを生成
+      document.getElementById('fileName').innerHTML = "<img id = 'cat1' src = 'src/nekos/"+ fileName+"'>";     
+    }
+  })
+};
+
+
+
 firebase.auth().onAuthStateChanged(async(user) => {
   if (user) {
     var userDoc = await firebase.firestore().collection('users').doc(user.uid).get();
@@ -287,4 +325,3 @@ firebase
   });
 });
 }
-

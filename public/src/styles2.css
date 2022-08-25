@@ -20,11 +20,16 @@
 body {
     margin:0;
     background-color: #FFF9D9;
-  text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
-  box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
+    text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
+    /* box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5); */
+}
+
+#shadow{
+  box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5); 
 }
 
 .cover-container {
+  height:100vh;
   max-width: 42em;
 }
 
@@ -57,3 +62,44 @@ header{
 h3{
     color: #707070;
 }
+
+/* .gacha{
+  position: relative;
+} */
+
+.gacha img{
+  width: 40%;
+}
+
+.gacha button {
+  background: rgba(252,171,171,0.5);
+  position:absolute;
+  width:30%;
+  height:10%;
+  top:55%;
+  left:50%;
+  -ms-transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  margin:0;
+  padding:0;
+  font-size: x-large;
+}
+
+
+.catImg2 #cat1{
+  position: absolute;
+  width: 25%;
+  top:60%;
+  right:5%;
+  z-index: 0;
+}
+
+#overflow_body{
+  box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5); 
+  overflow: hidden;
+}
+/* 
+.overflow{
+  overflow: hidden;
+} */

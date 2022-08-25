@@ -232,7 +232,7 @@ function loadCat(){
       console.log(catNum[rand]);
 
       //ねこデータベースを取得
-      const catRef = await firebase.firestore().collection('cats').doc(String(rand));
+      const catRef = await firebase.firestore().collection('cats').doc(String(catNum[rand]));
       const catDoc = await catRef.get();
       
       var fileName = catDoc.get('file_name');

@@ -31,32 +31,52 @@
           </a>
           <div class = "px-5">
         <nav class="nav nav-masthead justify-content-center float-md-end">
-          <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="./login.html">ホーム</a>
+          <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="./select.html">ホーム</a>
           <a class="nav-link fw-bold py-1 px-0" href="training.html">トレーニング</a>
           <a class="nav-link fw-bold py-1 px-0" href="neko.html">ねこを見る</a>
+          <a class="nav-link fw-bold py-1 px-0" href="gacha.html">ガチャ</a>
           <a class="nav-link fw-bold py-1 px-0" href="calendar.html">カレンダー</a>
+          <a class="text-white fw-bold py-1 px-0 dropdown"> 
+            <button id="btnOpenMenu" class="btn dropdown-toggle text-white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <!-- ユーザー名表示 -->
+              <i class="bi bi-person-fill"  id="userName"></i></a>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="btnOpenMenu">
+              <div class ="dropdown-item">
+                <!-- 保有コイン表示 -->
+                <i class="bi bi-coin fw-bold" id="coin"></i></a>
+              </div>
+              <a class="btn dropdown-item" role="button" href="login.html">サインアウト</a>
+            </div>
+          </a>
         </nav>
       </div>
       </div>
     </header>
 
       <div class="row mx-2 text-secondary">
-        <div class="col-md-4 shadow-sm">
+        <div class="col-md-6 shadow-sm">
           <a class = "text-secondary" href="training.html">
           <img src="src/nekos/amesho.PNG" height = "100">
           筋トレ
           </a>
         </div>
-        <div class="col-md-4 shadow-sm">
+        <div class="col-md-6 shadow-sm">
           <a class = "text-primary" href="neko.html">
           <img src="src/nekos/bengal.PNG" height = "100">
           猫をみる
           </a>
         </div>
-        <div class="col-md-4 shadow-sm">
+        <div class="col-md-6 shadow-sm">
           <a class = "text-danger" href="gacha.html">
           <img src = "src/nekos/green.PNG" height = "100">
           ガチャをひく
+          </a>
+        </div>
+        <div class="col-md-6 shadow-sm">
+          <a class = "text-success" href="calendar.html">
+          <img src = "src/nekos/flower.PNG" height = "100">
+          履歴をみる
           </a>
         </div>
     

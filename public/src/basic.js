@@ -53,7 +53,10 @@
 // }
 
 
-/* function viewItem(){
+
+
+//YouTubeに飛ばす
+function viewItem(){
   const item = document.getElementById("item1").value;
   const time = document.getElementById("time").value;
   const url = "https://www.youtube.com/results?search_query="+item+"+"+time+"分";
@@ -64,7 +67,7 @@
   location.href = url2;
   // console.log(url);
 
-} */
+}
 
 document.addEventListener('DOMContentLoaded', function(){
   firebase.auth().onAuthStateChanged(async(user) => {
@@ -139,15 +142,6 @@ function gacha(){
 });
 }
 
-//YouTubeに飛ばす
-function viewItem(){
-  const item = document.getElementById("item1").value;
-  const time = document.getElementById("time").value;
-  const url = "https://www.youtube.com/results?search_query="+item+"+"+time+"分";
-  window.open(url);
-  // console.log(url); 
-}
-
 //トレーニングを記録する
 function record(){
   const item = document.getElementById("item1").value;
@@ -218,7 +212,6 @@ firebase.auth().onAuthStateChanged(async(user) => {
     document.getElementById('coin').innerHTML = userMoney;
   }
 });
-
 //ログイン機能についての関数
 
 /*

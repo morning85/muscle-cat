@@ -53,10 +53,7 @@
 // }
 
 
-
-
-//YouTubeに飛ばす
-function viewItem(){
+/* function viewItem(){
   const item = document.getElementById("item1").value;
   const time = document.getElementById("time").value;
   const url = "https://www.youtube.com/results?search_query="+item+"+"+time+"分";
@@ -67,7 +64,7 @@ function viewItem(){
   location.href = url2;
   // console.log(url);
 
-}
+} */
 
 document.addEventListener('DOMContentLoaded', function(){
   firebase.auth().onAuthStateChanged(async(user) => {
@@ -140,6 +137,15 @@ function gacha(){
         document.getElementById('coin').innerHTML = userMoney;
     } 
 });
+}
+
+//YouTubeに飛ばす
+function viewItem(){
+  const item = document.getElementById("item1").value;
+  const time = document.getElementById("time").value;
+  const url = "https://www.youtube.com/results?search_query="+item+"+"+time+"分";
+  window.open(url);
+  // console.log(url); 
 }
 
 //トレーニングを記録する

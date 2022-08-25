@@ -325,3 +325,33 @@ firebase
   });
 });
 }
+
+function prof(num){
+  firebase.auth().onAuthStateChanged(async(user) => {
+    if (user) {
+        //データベースのusers情報（ねこ）を取得
+        const userRef = await firebase.firestore().collection('users').doc(user.uid);
+        const userDocument = await userRef.get()
+        var userCat = userDocument.get('cat');
+        console.log(userCat);
+        if (userCat[num]) {
+          const fileRef = await firebase.firestore().collection('cats').doc(String(num));
+          const fileDocument = await fileRef.get();
+          var cattype = fileDocument.get('cat_type');
+          var filename = fileDocument.get('file_name');
+          var catprof = fileDocument.get('prof');
+          var cathabitat = fileDocument.get('habitat');
+          document.getElementById("catName").innerHTML = cattype;
+          document.getElementById("profimg").src = "src/nekos/" + filename;
+          document.getElementById("prof").innerHTML = catprof;
+          document.getElementById("habitat").innerHTML = cathabitat;
+        }
+        else{
+          document.getElementById("catName").innerHTML = "unknownねこ";
+          document.getElementById("profimg").src = "src/nekos/unknown.PNG";
+          document.getElementById("prof").innerHTML = "コインを貯めてねこに会おう！";
+          document.getElementById("habitat").innerHTML = "生息地：???";
+        }
+    } 
+  });
+}

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ja" class="h-100">
+<html lang="ja" class="h-auto">
 <head>
   <!-- 基本ファイルのロード -->
   <script src="/__/firebase/7.16.0/firebase-app.js"></script>
@@ -10,7 +10,7 @@
   <link href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" rel="stylesheet" type="text/css">
 
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, height=devive-height, initial-scale=1">
 
   <title>筋肉ねこ</title>
   
@@ -36,7 +36,7 @@
 
 </head>
 
-<body class="text-center text-bg-dark d-flex h-100">
+<body id="shadow" class="text-center text-bg-dark d-flex h-auto">
   <div class="d-flex w-100 mx-auto flex-column ">
     <header class="mb-auto px-3 pt-3">
       <div>
@@ -45,31 +45,31 @@
             <img src = "src/猫.png" height="50mm" class = "float-md-start">
           </a>
           <div class = "px-5">
-        <nav class="nav nav-masthead justify-content-center float-md-end">
-          <a class="nav-link fw-bold py-1 px-0" href="./select.html">ホーム</a>
-          <a class="nav-link fw-bold py-1 px-0" href="training.html">トレーニング</a>
-          <a class="nav-link fw-bold py-1 px-0" href="neko.html">ねこを見る</a>
-          <a class="nav-link fw-bold py-1 px-0" href="gacha.html">ガチャ</a>
-          <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="calendar.html">カレンダー</a>
-          <a class="text-white fw-bold py-1 px-0 dropdown"> 
-            <button id="btnOpenMenu" class="btn dropdown-toggle text-white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <!-- ユーザー名表示 -->
-              <i class="bi bi-person-fill"  id="userName"></i></a>
-            </button>
-            <div class="dropdown-menu" aria-labelledby="btnOpenMenu">
-              <div class ="dropdown-item">
-                <!-- 保有コイン表示 -->
-                <i class="bi bi-coin fw-bold" id="coin"></i></a>
-              </div>
-              <a class="btn dropdown-item" role="button" href="login.html">サインアウト</a>
-            </div>
-          </a>
-        </nav>
+            <nav class="nav nav-masthead justify-content-center float-md-end">
+              <a class="nav-link fw-bold py-1 px-0" href="./select.html">ホーム</a>
+              <a class="nav-link fw-bold py-1 px-0" href="training.html">トレーニング</a>
+              <a class="nav-link fw-bold py-1 px-0" href="neko.html">ねこを見る</a>
+              <a class="nav-link fw-bold py-1 px-0" href="gacha.html">ガチャ</a>
+              <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="calendar.html">りれき</a>
+              <a class="text-white fw-bold py-1 px-0 dropdown"> 
+                <button id="btnOpenMenu" class="btn dropdown-toggle text-white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <!-- ユーザー名表示 -->
+                  <i class="bi bi-person-fill"  id="userName"></i></a>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="btnOpenMenu">
+                  <div class ="dropdown-item">
+                    <!-- 保有コイン表示 -->
+                    <i class="bi bi-coin fw-bold" id="coin"></i></a>
+                  </div>
+                  <a class="btn dropdown-item" role="button" href="login.html">サインアウト</a>
+                </div>
+              </a>
+            </nav>
       </div>
       </div>
     </header>
 
-    <main>
+    <main class = "mt-5">
       <h3 class="mb-3">筋トレ履歴</h3>
     </main>
 
